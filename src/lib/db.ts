@@ -1,36 +1,35 @@
 import { MongoClient, Document } from "mongodb";
-import { setServers } from "node:dns";
+import { databaseContext, type DatabaseState } from "./db-context";
 
-setServers(["8.8.8.8", "8.8.4.4"]);
-
-let client: MongoClient | undefined;
-let connecting: Promise<MongoClient> | undefined;
+const nodeState: DatabaseState = {};
+const state = () => databaseContext.getStore() ?? nodeState;
 export function connection() {
   if (!process.env.MONGODB_URI) throw new Error("Database not configured");
-  return (client ??= new MongoClient(process.env.MONGODB_URI));
+  return (state().client ??= new MongoClient(process.env.MONGODB_URI));
 }
 export async function db() {
   const c = await connectedClient();
   return c.db(process.env.MONGODB_DB || "cmms");
 }
 async function connectedClient() {
-  if (!connecting) {
+  const current = state();
+  if (!current.connecting) {
     const c = connection();
     // Share connection establishment so concurrent requests never use a
     // topology that another request is still opening (or closing on failure).
-    connecting = c.connect().catch(async (error) => {
+    current.connecting = c.connect().catch(async (error) => {
       try {
         await c.close();
       } catch {
         // Preserve the original connection error.
       }
-      if (client === c) client = undefined;
+      if (current.client === c) current.client = undefined;
       throw error;
     }).finally(() => {
-      connecting = undefined;
+      current.connecting = undefined;
     });
   }
-  return connecting;
+  return current.connecting;
 }
 export async function tx<T>(
   fn: (

@@ -2,6 +2,26 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { MongoClient } from "mongodb";
 import { connection, db, tx } from "../src/lib/db";
+import { databaseContext } from "../src/lib/db-context";
+
+test("overlapping Worker requests isolate clients while sharing within a request", async () => {
+  const previousUri = process.env.MONGODB_URI;
+  process.env.MONGODB_URI = "mongodb://127.0.0.1:27017";
+  const clients: MongoClient[] = [];
+  try {
+    await Promise.all([0, 1].map(() => databaseContext.run({}, async () => {
+      const client = connection();
+      clients.push(client);
+      await new Promise(resolve => setImmediate(resolve));
+      assert.equal(connection(), client);
+    })));
+    assert.notEqual(clients[0], clients[1]);
+  } finally {
+    await Promise.all(clients.map(client => client.close()));
+    if (previousUri === undefined) delete process.env.MONGODB_URI;
+    else process.env.MONGODB_URI = previousUri;
+  }
+});
 
 test("database requests wait for connection and recover after a failed connection", async (t) => {
   const previousUri = process.env.MONGODB_URI;

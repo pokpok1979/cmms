@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "setup": "node --import tsx scripts/setup.ts",
@@ -23,6 +26,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.1149.0",
     "@aws-sdk/s3-request-presigner": "3.1149.0",
+    "@opennextjs/cloudflare": "1.20.13",
     "jose": "6.2.12",
     "ldapts": "^9.2.0",
     "mongodb": "^7.7.0",
@@ -42,7 +46,8 @@
     "@types/react-dom": "19.3.0",
     "tailwindcss": "4.3.3",
     "tsx": "4.23.15",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "wrangler": "4.153.0"
   },
   "private": true,
   "engines": {

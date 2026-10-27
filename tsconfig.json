@@ -44,6 +44,7 @@
     ".next-pm-verify/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".open-next"
   ]
 }
