@@ -1,33 +1,35 @@
 "use client";
-import AttachmentGallery from "./AttachmentGallery";
 import Pagination, { useClientPagination } from "./Pagination";
-import Notifications from "./Notifications";
 import { useEffect, useRef, useState, FormEvent } from "react";
-import AdminUsers from "./AdminUsers";
-import PermissionMatrix from "./PermissionMatrix";
-import LdapSettings from "./LdapSettings";
-import SmtpSettings from "./SmtpSettings";
 import { permitted, modules as permissionModules } from "@/lib/permissions";
-import AssetEditor from "./AssetEditor";
-import SystemSettings from "./SystemSettings";
-import WorkTypes from "./WorkTypes";
-import MasterData from "./MasterData";
-import Companies from "./Companies";
-import Guide from "./Guide";
 import { guideCanOpen } from "@/lib/guide-data";
-import QRCode from "qrcode";
-import UserMenu from "./UserMenu";
-import ForgotPasswordDialog from "./ForgotPasswordDialog";
-import Dashboard from "./Dashboard";
-import InventoryWorkspace from "./inventory/Workspace";
-import PMWorkspace from "./pm/advanced/Workspace";
-import AuditHistory from "./AuditHistory";
+import dynamic from "next/dynamic";
 import "./workspace.css";
 import "./workspace-motion.css";
 import "./workspace-cards.css";
+import "./password-recovery.css";
 import { labels, User, manager, inScope, canTransition } from "@/lib/domain";
 import { displayDocumentNumber } from "@/lib/document-number";
 import { TypewriterText, ParticleBackground } from "./LoginMotion";
+
+const AttachmentGallery = dynamic(() => import("./AttachmentGallery"));
+const Notifications = dynamic(() => import("./Notifications"));
+const AdminUsers = dynamic(() => import("./AdminUsers"));
+const PermissionMatrix = dynamic(() => import("./PermissionMatrix"));
+const LdapSettings = dynamic(() => import("./LdapSettings"));
+const SmtpSettings = dynamic(() => import("./SmtpSettings"));
+const AssetEditor = dynamic(() => import("./AssetEditor"));
+const SystemSettings = dynamic(() => import("./SystemSettings"));
+const WorkTypes = dynamic(() => import("./WorkTypes"));
+const MasterData = dynamic(() => import("./MasterData"));
+const Companies = dynamic(() => import("./Companies"));
+const Guide = dynamic(() => import("./Guide"));
+const UserMenu = dynamic(() => import("./UserMenu"));
+const ForgotPasswordDialog = dynamic(() => import("./ForgotPasswordDialog"));
+const Dashboard = dynamic(() => import("./Dashboard"));
+const InventoryWorkspace = dynamic(() => import("./inventory/Workspace"));
+const PMWorkspace = dynamic(() => import("./pm/advanced/Workspace"));
+const AuditHistory = dynamic(() => import("./AuditHistory"));
 
 function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, string> = {
@@ -339,6 +341,7 @@ export default function App() {
         if (sequence !== loadSequence.current) return;
         setDetail(x);
         if (view === "assets") {
+          const QRCode = (await import("qrcode")).default;
           const image = await QRCode.toDataURL(locationOrigin() + "/?asset=" + x._id);
           if (sequence === loadSequence.current) setQr(image);
         }
@@ -547,7 +550,7 @@ export default function App() {
               <div>
                 <div className="login-password-heading">
                   <label htmlFor="login-password">รหัสผ่าน</label>
-                  <button type="button" className="forgot-password-link" onClick={()=>setForgotPassword(true)}>ลืมรหัสผ่าน?</button>
+                  <a href="#forgot-password" className="forgot-password-link" aria-haspopup="dialog" onClick={(event)=>{event.preventDefault();setForgotPassword(true);}}>ลืมรหัสผ่าน?</a>
                 </div>
                 <div className="password-field">
                   <input
