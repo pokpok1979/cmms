@@ -1,0 +1,11 @@
+.erp-shell .cmms-pagination { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:20px 0 4px; margin-top:16px; border-top:1px solid #e1ebe7; color:#83969d; font-size:13px; }
+.cmms-pagination b { font-weight:600; }
+.cmms-pagination > span { margin-left:24px; }
+.cmms-pagination nav { display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
+.erp-shell .cmms-pagination button { display:grid; place-items:center; min-width:32px; height:32px; padding:0 7px; margin:0; border:1px solid #dce7e5; border-radius:8px; background:#fff; color:#496975; font-size:13px; font-weight:400; box-shadow:none; }
+.erp-shell .cmms-pagination button[aria-current="page"] { background:#00a384; color:#fff; border-color:#00a384; font-weight:700; }
+.erp-shell .cmms-pagination button:hover:not(:disabled):not([aria-current]) { background:#edf9f5; border-color:#8fd7c3; }
+.cmms-pagination button svg { width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.5; }
+.cmms-pagination .cmms-page-gap { padding:0 3px; }
+.cmms-pagination button:focus-visible { outline:2px solid #008c70; outline-offset:3px; }
+@media(max-width:600px) { .erp-shell .cmms-pagination { font-size:12px; } .cmms-pagination nav { gap:4px; } .erp-shell .cmms-pagination button { min-width:30px; height:32px; padding:0 6px; } }

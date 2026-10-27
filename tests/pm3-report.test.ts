@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { querySchema,jobFilter,planSchema } from '../src/lib/pm3-service';
+import { crc32,pmWorkbook } from '../src/lib/pm3-xlsx';
+import type { User } from '../src/lib/domain';
+const u:User={_id:'T1',name:'T',username:'t',role:'technician',grants:[{companyId:'C1',siteId:'S1'},{companyId:'C2',siteId:'S2'}]};
+test('report retains paired grants and assigned technician restriction',()=>{const f=jobFilter(u,querySchema.parse({from:'2026-10-01',to:'2026-10-31',q:'.*'}));assert.deepEqual(f.$or,[{companyId:'C1',siteId:'S1'},{companyId:'C2',siteId:'S2'}]);assert.equal(f.assigneeId,'T1');assert.ok(JSON.stringify(f).includes('\\\\.\\\\*'));});
+test('deny no-grant scope and reject invalid date bounds',()=>{assert.deepEqual(jobFilter({...u,grants:[]},querySchema.parse({from:'2026-10-01',to:'2026-10-31'})).$or,[{siteId:'__none__'}]);for(const v of [{from:'2026-02-30',to:'2026-03-01'},{from:'2026-10-02',to:'2026-10-01'},{from:'2020-01-01',to:'2026-01-01'}])assert.equal(querySchema.safeParse(v).success,false);});
+test('plan rejects excessive lead days and empty checklist',()=>{const p={title:'A',assetId:'A1',assigneeId:'T1',start:'2026-10-22',unit:'month',interval:1,checklist:['check'],leadDays:3};assert.equal(planSchema.safeParse(p).success,true);assert.equal(planSchema.safeParse({...p,leadDays:31}).success,false);assert.equal(planSchema.safeParse({...p,checklist:[]}).success,false);});
+test('XLSX ZIP checksum and literal formula-like text',()=>{assert.equal(crc32(Buffer.from('123456789')),0xcbf43926);const b=pmWorkbook([['ชื่อ','จำนวน'],['=HYPERLINK("bad")',2],['ไทย < & >',0]]);assert.equal(b.readUInt32LE(0),0x04034b50);const s=b.toString('utf8');assert.ok(s.includes('t="inlineStr"'));assert.ok(s.includes('=HYPERLINK(&quot;bad&quot;)'));assert.ok(!s.includes('<f>'));assert.ok(s.includes('ไทย &lt; &amp; &gt;'));assert.equal(b.readUInt32LE(b.length-22),0x06054b50);});

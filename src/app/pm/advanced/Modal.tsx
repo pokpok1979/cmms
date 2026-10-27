@@ -1,0 +1,3 @@
+'use client';
+import { useRef,useEffect,ReactNode } from 'react';
+export default function Modal({title,children,onClose,busy=false}:{title:string;children:ReactNode;onClose:()=>void;busy?:boolean}){const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const d=ref.current;d?.showModal();return()=>d?.close();},[]);return <dialog className="p3-modal" ref={ref} onCancel={e=>{e.preventDefault();if(!busy)onClose();}} aria-label={title}><div className="p3-modal-head"><h2>{title}</h2><button type="button" disabled={busy} onClick={onClose} aria-label="ปิดหน้าต่าง">✕</button></div>{children}</dialog>;}

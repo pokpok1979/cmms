@@ -1,0 +1,281 @@
+.erp-shell .panel.audit-history {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.audit-filters {
+  padding: 16px 20px;
+  display: grid;
+  gap: 10px;
+  border-bottom: 1px solid #e2ece7;
+}
+.audit-filter-top {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.audit-filter-top select {
+  width: 210px;
+}
+.audit-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 400px;
+  max-width: 100%;
+  border: 1px solid #d8e4df;
+  border-radius: 10px;
+  padding: 0 12px;
+}
+.erp-shell .audit-search input {
+  border: 0;
+  background: transparent;
+  min-width: 0;
+  width: 100%;
+  box-shadow: none;
+}
+.audit-search > span {
+  color: #73918b;
+  font-size: 23px;
+}
+.audit-user-filter {
+  width: 100%;
+}
+.audit-filter-bottom {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.audit-dates {
+  display: flex;
+}
+.audit-dates label {
+  display: flex;
+  align-items: center;
+}
+.audit-dates label > span {
+  padding: 10px 12px;
+  color: #799197;
+  background: #f5f9f7;
+  border: 1px solid #d8e4df;
+  border-right: 0;
+}
+.erp-shell .audit-dates input {
+  border-radius: 0;
+  width: 158px;
+}
+.audit-dates label:first-child > span {
+  border-radius: 10px 0 0 10px;
+}
+.erp-shell .audit-dates label:last-child input {
+  border-radius: 0 10px 10px 0;
+}
+.audit-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: #758e95;
+}
+.erp-shell .audit-table {
+  min-width: 1100px;
+  font-size: 12px;
+}
+.erp-shell .audit-table th {
+  background: #fafcfb;
+  font-weight: 500;
+  color: #779096;
+  padding: 12px 14px;
+}
+.erp-shell .audit-table td {
+  padding: 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #eaf0ed;
+}
+.audit-table tr:hover {
+  background: #f2fbf7;
+}
+.audit-table time {
+  white-space: nowrap;
+}
+.audit-table td > small {
+  display: block;
+  color: #83969b;
+  margin-top: 4px;
+}
+.audit-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #00a78d;
+  white-space: nowrap;
+}
+.audit-avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #25b363;
+  color: #fff;
+  font-size: 10px;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 3px #b9e6ca;
+}
+.audit-module {
+  border-radius: 5px;
+  background: #eef3f2;
+  padding: 3px 7px;
+  white-space: nowrap;
+  color: #4e6d73;
+}
+.audit-action {
+  border-radius: 5px;
+  background: #ecfbf7;
+  border: 1px solid #d0eee6;
+  color: #029b89;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.erp-shell .audit-reference {
+  color: #009b80;
+  font-family: monospace;
+}
+.audit-ip {
+  font-family: monospace;
+  color: #748d95;
+  white-space: nowrap;
+}
+.audit-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 14px 20px;
+  font-size: 12px;
+}
+@media (max-width: 760px) {
+  .audit-filter-top select,
+  .audit-search {
+    width: 100%;
+  }
+  .audit-dates {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .audit-filter-bottom {
+    align-items: flex-start;
+  }
+  .audit-count {
+    width: 100%;
+    text-align: right;
+  }
+}
+.audit-search,
+.audit-dates label {
+  flex-direction: row;
+  font-weight: 400;
+}
+.audit-dates label {
+  gap: 0;
+}
+
+@media (max-width: 760px) {
+  .erp-shell .audit-history .table-scroll {
+    overflow-x: auto;
+  }
+  .erp-shell .audit-table {
+    display: table;
+  }
+  .erp-shell .audit-table thead {
+    display: table-header-group;
+  }
+  .erp-shell .audit-table tbody {
+    display: table-row-group;
+  }
+  .erp-shell .audit-table tr {
+    display: table-row;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .erp-shell .audit-table td,
+  .erp-shell .audit-table td:nth-child(2) {
+    display: table-cell;
+  }
+  .erp-shell .audit-table td:before {
+    display: none;
+  }
+}
+
+.audit-pagination {
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-top: 1px solid #eaf0ed;
+  flex-wrap: wrap;
+}
+.audit-range {
+  color: #7a9096;
+  font-size: 12px;
+}
+.audit-range b {
+  font-weight: 600;
+}
+.audit-page-buttons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+}
+.erp-shell .audit-page-buttons button {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0 9px;
+  border: 1px solid #e2eae7;
+  border-radius: 8px;
+  background: #fff;
+  color: #48656d;
+  font-size: 13px;
+  font-weight: 400;
+}
+.erp-shell .audit-page-buttons button:hover:not(:disabled) {
+  background: #f0faf5;
+  border-color: #afd9ca;
+}
+.erp-shell .audit-page-buttons button.selected {
+  background: #009c79;
+  border-color: #009c79;
+  color: #fff;
+  font-weight: 600;
+}
+.erp-shell .audit-page-buttons button.selected:hover:not(:disabled) {
+  background: #008666;
+}
+.erp-shell .audit-page-buttons button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+.audit-page-ellipsis {
+  padding: 0 8px;
+  color: #748b92;
+}
+@media (max-width: 480px) {
+  .audit-pagination {
+    padding: 14px;
+    gap: 12px;
+  }
+  .audit-page-buttons {
+    gap: 4px;
+  }
+  .erp-shell .audit-page-buttons button {
+    min-width: 30px;
+    padding: 0 7px;
+  }
+  .audit-page-ellipsis {
+    padding: 0 3px;
+  }
+}

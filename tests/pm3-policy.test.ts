@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { addDays,occurrenceId,canRecordPM,canSeePM,photoType,plannedDays,onTime } from '../src/lib/pm3-policy';
+import type { User } from '../src/lib/domain';
+const tech:User={_id:'T1',name:'Technician',username:'tech',role:'technician',grants:[{companyId:'C1',siteId:'S1'}]};
+test('only assigned technician may change pending PM',()=>{assert.equal(canRecordPM(tech,{assigneeId:'T1',status:'pending'}),true);assert.equal(canRecordPM(tech,{assigneeId:'T2',status:'pending'}),false);assert.equal(canRecordPM(tech,{assigneeId:'T1',status:'completed'}),false);assert.equal(canRecordPM({...tech,role:'admin'},{assigneeId:'T1',status:'pending'}),false);});
+test('technician cannot inspect another technician job',()=>{assert.equal(canSeePM(tech,{assigneeId:'T2'}),false);assert.equal(canSeePM({...tech,role:'executive'},{assigneeId:'T2'}),true);});
+test('occurrence keys preserve legacy and isolate revised plans',()=>{assert.equal(occurrenceId('P',0,2),'pm:P:2');assert.notEqual(occurrenceId('P',1,2),occurrenceId('P',0,2));});
+test('upcoming and overdue dates cross year and leap day',()=>{assert.equal(addDays('2024-02-28',2),'2024-03-01');assert.equal(addDays('2026-01-01',-1),'2025-12-31');});
+test('reject disguised photo content',()=>{assert.equal(photoType(Buffer.from('%PDF-1.7')),null);assert.equal(photoType(Buffer.from([255,216,255,0])),'image/jpeg');assert.equal(photoType(Buffer.from([137,80,78,71,13,10,26,10])),'image/png');assert.equal(photoType(Buffer.from([137,80])),null);});
+test('calendar projection preserves anchored month end',()=>{assert.deepEqual(plannedDays({start:'2024-01-31',unit:'month',interval:1},'2024-02-01','2024-03-31'),['2024-02-29','2024-03-31']);});
+test('calendar projects old daily plans efficiently and skips generated cycles',()=>{assert.deepEqual(plannedDays({start:'2000-01-01',unit:'day',interval:1},'2026-10-01','2026-10-03'),['2026-10-01','2026-10-02','2026-10-03']);assert.deepEqual(plannedDays({start:'2026-10-01',unit:'day',interval:1,nextIndex:3},'2026-10-01','2026-10-05'),['2026-10-04','2026-10-05']);});
+test('on time uses Bangkok completion date rather than UTC',()=>{assert.equal(onTime({status:'completed',due:'2026-10-22',completedAt:'2026-10-22T16:59:59Z'}),true);assert.equal(onTime({status:'completed',due:'2026-10-22',completedAt:'2026-10-22T17:00:00Z'}),false);assert.equal(onTime({status:'pending',due:'2026-10-22'}),false);});

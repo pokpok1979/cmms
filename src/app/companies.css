@@ -1,0 +1,53 @@
+.companies .wt-layout {
+  grid-template-columns: minmax(0, 1.8fr) minmax(310px, 1fr);
+}
+.companies .wt-table {
+  min-width: 610px;
+}
+.companies .wt-table td:first-child {
+  width: 14%;
+  font-family: monospace;
+  font-size: 11px;
+}
+.companies .wt-table td:nth-child(2) {
+  width: 36%;
+  color: #41624c;
+}
+.companies .wt-table td:nth-child(3) {
+  overflow-wrap: anywhere;
+}
+.companies .wt-table small {
+  color: #8fa195;
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+.companies .cmp-count {
+  display: inline;
+  color: #8c9d92;
+  font-size: 10px;
+  font-weight: 400;
+  margin-left: 6px;
+}
+.companies .cmp-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.companies .cmp-wide {
+  grid-column: 1/-1;
+}
+.companies .cmp-help {
+  margin: 0;
+  color: #8d9f90;
+  font-size: 10px;
+  line-height: 1.6;
+}
+@media (max-width: 1100px) {
+  .companies .wt-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .companies .cmp-form {
+    grid-template-columns: 1fr;
+  }
+}

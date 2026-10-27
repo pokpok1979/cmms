@@ -1,0 +1,4 @@
+import nextEnv from '@next/env';
+nextEnv.loadEnvConfig(process.cwd());
+async function main(){const {db,connection}=await import('../src/lib/db');try{const d=await db();await d.collection('inventoryParts').createIndex({companyId:1,siteId:1,code:1},{unique:true});await d.collection('inventoryMovements').createIndex({companyId:1,siteId:1,at:-1});await d.collection('inventoryMovements').createIndex({partId:1,kind:1,at:-1});await d.collection('inventoryMovements').createIndex({workOrderId:1,at:-1});await d.collection('workOrders').createIndex({companyId:1,siteId:1,partsCostSatang:1});console.log('Inventory indexes ready. No stock/user/password seeded.');}finally{await connection().close();}}
+main().catch(e=>{console.error('Inventory setup failed:',e instanceof Error?e.message:'unknown');process.exitCode=1;});

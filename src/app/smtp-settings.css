@@ -1,0 +1,14 @@
+.smtp-settings > .panel { margin-bottom: 16px; }
+.smtp-settings h2 { font-size: 17px; margin: 0 0 16px; }
+.smtp-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; padding: 0; border: 0; margin: 0; min-width: 0; }
+.smtp-fields label { min-width: 0; }
+.smtp-fields input, .smtp-fields select { width: 100%; }
+.smtp-fields .smtp-check { display: flex; flex-direction: row; align-items: center; gap: 10px; }
+.smtp-fields .smtp-check input { width: 18px; height: 18px; min-height: 18px; margin: 0; }
+.smtp-wide { grid-column: 1 / -1; }
+.smtp-note { color: #6c7d7b; font-size: 12px; line-height: 1.7; margin: 0; }
+.smtp-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.smtp-status { display: inline-block; border-radius: 6px; padding: 4px 8px; font-size: 12px; }
+.smtp-status.enabled { color: #166534; background: #dcfce7; }
+.smtp-status.disabled { color: #64748b; background: #f1f5f9; }
+@media (max-width: 600px) { .smtp-fields { grid-template-columns: 1fr; gap: 14px; } }

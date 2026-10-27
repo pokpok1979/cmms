@@ -1,0 +1,3 @@
+export function validDay(s:string){return /^\d{4}-\d{2}-\d{2}$/.test(s)&&new Date(s+'T00:00:00Z').toISOString().slice(0,10)===s;}
+export function bangkokDay(now=new Date()){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);}
+export function cycleDay(start:string,unit:'day'|'month',interval:number,index:number){const d=new Date(start+'T00:00:00Z');if(unit==='day')d.setUTCDate(d.getUTCDate()+interval*index);else {const day=d.getUTCDate();d.setUTCDate(1);d.setUTCMonth(d.getUTCMonth()+interval*index);const end=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();d.setUTCDate(Math.min(day,end));}return d.toISOString().slice(0,10);}

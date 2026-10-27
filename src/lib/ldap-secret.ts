@@ -1,0 +1,4 @@
+import { createCipheriv,createDecipheriv,randomBytes } from "node:crypto";
+function key(){const value=process.env.LDAP_ENCRYPTION_KEY||"";if(!/^[a-f0-9]{64}$/i.test(value))throw new Error("LDAP_ENCRYPTION_KEY must be 64 hex characters");return Buffer.from(value,"hex");}
+export function sealLdapSecret(value:string){const iv=randomBytes(12),cipher=createCipheriv("aes-256-gcm",key(),iv);const encrypted=Buffer.concat([cipher.update(value,"utf8"),cipher.final()]);return [iv,cipher.getAuthTag(),encrypted].map(x=>x.toString("base64")).join(".");}
+export function openLdapSecret(value:string){const [iv,tag,encrypted]=value.split(".").map(x=>Buffer.from(x,"base64"));const cipher=createDecipheriv("aes-256-gcm",key(),iv);cipher.setAuthTag(tag);return Buffer.concat([cipher.update(encrypted),cipher.final()]).toString("utf8");}

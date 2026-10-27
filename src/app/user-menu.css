@@ -1,0 +1,166 @@
+.erp-shell .account-menu {
+  position: relative;
+  font-family: var(--app-font, inherit);
+}
+.erp-shell .account-trigger {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: transparent;
+  color: #203d31;
+  padding: 5px 7px;
+  border-radius: 12px;
+  text-align: left;
+  min-height: 48px;
+}
+.erp-shell .account-trigger:hover {
+  background: #f3faf6;
+  box-shadow: none;
+}
+.erp-shell .account-avatar {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #55bd79, #16a34a);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid #fff;
+  outline: 1px solid #a7e0ba;
+}
+.erp-shell .account-trigger-text {
+  display: grid;
+  gap: 1px;
+}
+.erp-shell .account-trigger-text strong {
+  font-size: 13px;
+  font-weight: 600;
+  max-width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.erp-shell .account-trigger-text small {
+  color: #7b8c81;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.erp-shell .account-chevron {
+  display: flex;
+  color: #7b9184;
+  transition: transform 0.15s;
+}
+.erp-shell .account-chevron.is-open {
+  transform: rotate(180deg);
+}
+.erp-shell .account-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 250px;
+  max-width: calc(100vw - 28px);
+  background: #fff;
+  border: 1px solid #e2eae5;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px #1333261f;
+  padding: 8px;
+  z-index: 60;
+}
+.erp-shell .account-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px 12px;
+}
+.erp-shell .account-avatar-large {
+  width: 38px;
+  height: 38px;
+  font-size: 15px;
+}
+.erp-shell .account-summary > div {
+  min-width: 0;
+}
+.erp-shell .account-summary strong {
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.erp-shell .account-summary p {
+  margin: 2px 0 6px;
+  font-size: 12px;
+  color: #778a7e;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.erp-shell .account-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid #cce8e0;
+  border-radius: 20px;
+  background: #edf8f4;
+  color: #07856a;
+  font-size: 11px;
+  font-weight: 600;
+}
+.erp-shell .account-role svg {
+  width: 14px;
+  height: 14px;
+}
+.erp-shell .account-links,
+.erp-shell .account-signout {
+  border-top: 1px solid #e5ece7;
+  padding: 6px 0;
+}
+.erp-shell .account-panel button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: transparent;
+  color: #3e574a;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 10px;
+  padding: 8px 10px;
+  min-height: 36px;
+}
+.erp-shell .account-panel button:hover {
+  background: #f0faf4;
+  box-shadow: none;
+}
+.erp-shell .account-panel button svg {
+  color: #80948a;
+}
+.erp-shell .account-signout {
+  padding-bottom: 0;
+}
+.erp-shell .account-signout button:hover {
+  color: #b45343;
+  background: #fff5f2;
+}
+@media (max-width: 760px) {
+  .erp-shell .account-trigger-text {
+    display: none;
+  }
+  .erp-shell .account-trigger {
+    gap: 6px;
+    padding: 4px;
+  }
+  .erp-shell .account-panel {
+    top: calc(100% + 8px);
+  }
+  .erp-shell .account-summary {
+    padding: 10px 6px 12px;
+  }
+  .erp-shell .account-summary strong {
+    font-size: 14px;
+  }
+}
+
+.erp-shell .account-panel button svg { width:18px; height:18px; flex-shrink:0; }

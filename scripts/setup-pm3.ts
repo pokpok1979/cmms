@@ -1,0 +1,4 @@
+import nextEnv from '@next/env';
+nextEnv.loadEnvConfig(process.cwd());
+async function main(){const {db,connection}=await import('../src/lib/db');try{const d=await db();await d.collection('pmPlans').createIndex({active:1,nextDue:1});await d.collection('pmOccurrences').createIndex({planId:1,due:1},{unique:true});await d.collection('pmOccurrences').createIndex({companyId:1,siteId:1,due:1});await d.collection('pmOccurrences').createIndex({status:1,overdueNotified:1,due:1});await d.collection('pmPlanVersions').createIndex({planId:1,version:-1});await d.collection('pmPhotos').createIndex({jobId:1,at:1});console.log('Phase 3 indexes ready. No user or password changes.');}finally{await connection().close();}}
+main().catch(e=>{console.error('Setup Phase 3 failed:',e instanceof Error?e.message:'unknown');process.exitCode=1;});

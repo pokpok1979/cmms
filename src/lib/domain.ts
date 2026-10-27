@@ -1,0 +1,8 @@
+export type Role='requester'|'technician'|'supervisor'|'executive'|'admin';
+export type User={_id:string; name:string; username:string; department?:string; position?:string; role:Role; grants:{companyId:string;siteId:string}[]; permissions?:import('./permissions').Matrix};
+export const labels:Record<string,string>={pending:'รออนุมัติ',approved:'อนุมัติแล้ว',in_progress:'กำลังดำเนินการ',awaiting_acceptance:'รอผู้แจ้งยืนยัน',closed:'ปิดงาน',rejected:'ไม่อนุมัติ',cancelled:'ยกเลิก',unassigned:'รอมอบหมาย',assigned:'มอบหมายแล้ว',accepted:'รับงานแล้ว',waiting_parts:'รออะไหล่',waiting_contractor:'รอผู้รับเหมา',review:'รอตรวจรับ',completed:'เสร็จสิ้น'};
+export function manager(u:User){return ['admin','supervisor'].includes(u.role);}
+export function scope(u:User){return {$or:u.grants.length?u.grants.map(g=>({companyId:g.companyId,siteId:g.siteId})):[{siteId:'__none__'}]};}
+export function inScope(u:User,r:{companyId:string;siteId:string}){return u.grants.some(g=>g.companyId===r.companyId&&g.siteId===r.siteId);}
+export const transitions:Record<string,string[]>={unassigned:['assigned','cancelled'],assigned:['accepted','cancelled'],accepted:['in_progress','cancelled'],in_progress:['waiting_parts','waiting_contractor','review','cancelled'],waiting_parts:['in_progress','cancelled'],waiting_contractor:['in_progress','cancelled'],review:['completed','in_progress'],completed:[],cancelled:[]};
+export function canTransition(u:User,r:{status:string;assigneeIds:string[]},next:string){if(!transitions[r.status]?.includes(next))return false;if(['assigned','completed','cancelled'].includes(next)||(r.status==='review'&&next==='in_progress'))return manager(u);return u.role==='technician'&&r.assigneeIds.includes(u._id);}

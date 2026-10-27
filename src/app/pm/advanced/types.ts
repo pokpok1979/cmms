@@ -1,0 +1,6 @@
+export type Plan={_id:string;title:string;assetId:string;assetName:string;assigneeId:string;start:string;unit:'day'|'month';interval:number;checklist:string[];leadDays?:number;version?:number;active:boolean;nextDue:string;at?:string;changedBy?:string};
+export type Job={_id:string;title:string;assetName:string;due:string;status:string;assigneeId:string;checklist:string[];results?:('pass'|'fail')[];note?:string;completedAt?:string;defectRequestId?:string;defectRequestNumber?:string;planVersion?:number;projected?:boolean};
+export type Photo={_id:string;name:string;stage:'before'|'after';at:string};
+export type Lookups={plans:Plan[];assets:{_id:string;name:string;code:string}[];staff:{_id:string;name:string}[];canManage:boolean;canCreate:boolean;canEdit:boolean;canDefect:boolean;storageReady:boolean;activePlans:number;userId:string;role:string;today:string};
+export type Report={jobs:Job[];total:number;page:number;counts:{total:number;pending:number;completed:number;overdue:number;failed:number;onTime:number}};
+export async function request<T>(url:string,init?:RequestInit):Promise<T>{const r=await fetch(url,{cache:'no-store',...init});const data=await r.json();if(!r.ok)throw new Error(data.error||'ดำเนินการไม่สำเร็จ');return data;}

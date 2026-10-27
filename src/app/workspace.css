@@ -1,0 +1,619 @@
+/* Post-login workspace only. Login styles stay in globals.css. */
+.erp-shell .accept-work-button {
+  width: 100%;
+  margin-inline: 0;
+}
+.erp-shell .asset-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.erp-shell .asset-editor,
+.erp-shell .asset-editor-buttons {
+  display: contents;
+}
+.erp-shell .asset-actions > button,
+.erp-shell .asset-editor-buttons > button {
+  margin: 0;
+  white-space: nowrap;
+}
+.erp-shell .asset-editor > form,
+.erp-shell .asset-delete-confirm {
+  flex-basis: 100%;
+  min-width: 0;
+}
+.erp-shell {
+  background: #f3f6f5;
+  --sidebar-width: 264px;
+}
+.erp-shell aside {
+  width: var(--sidebar-width);
+  background: #fff;
+  border-right: 1px solid #e4ebe7;
+  color: #233d33;
+  padding: 18px 14px;
+  transition: width 0.18s;
+}
+.erp-shell aside .brand {
+  margin-bottom: 24px;
+  font-size: 20px;
+  color: #078762;
+  gap: 10px;
+  padding-right: 18px;
+}
+.erp-shell aside .brand small {
+  color: #7a8a83;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+.erp-shell aside .brand-mark {
+  background: linear-gradient(135deg, #34d399, #059669);
+  border: 0;
+  box-shadow: 0 4px 12px #05966925;
+}
+.erp-shell .desktop-collapse {
+  display: grid;
+  position: absolute;
+  top: 22px;
+  right: 8px;
+  min-height: 30px;
+  padding: 6px;
+  color: #83968b;
+}
+.erp-shell .workspace {
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.18s;
+}
+.erp-shell .menu-search {
+  margin-bottom: 20px;
+}
+.erp-shell .menu-search input {
+  background: #f6f8f7;
+  font-size: 12px;
+  min-height: 40px;
+  padding: 10px 12px;
+}
+.erp-shell aside nav {
+  overflow-y: auto;
+  flex: 1;
+  gap: 7px;
+  align-content: start;
+}
+.erp-shell aside nav button {
+  color: #587166;
+  min-height: 42px;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+.erp-shell aside nav button:hover {
+  background: #f3faf6;
+}
+/* Keep each menu icon's category color in normal, hover and active states. */
+.erp-shell aside nav button[data-menu] > svg {
+  color: var(--menu-icon-color, #047857);
+  flex-shrink: 0;
+}
+.erp-shell aside nav [data-menu="dashboard"] { --menu-icon-color: #2563eb; }
+.erp-shell aside nav [data-menu="repairRequests"] { --menu-icon-color: #d97706; }
+.erp-shell aside nav [data-menu="workOrders"] { --menu-icon-color: #059669; }
+.erp-shell aside nav [data-menu="companies"] { --menu-icon-color: #1d4ed8; }
+.erp-shell aside nav [data-menu="sites"] { --menu-icon-color: #0891b2; }
+.erp-shell aside nav [data-menu="locations"] { --menu-icon-color: #e11d48; }
+.erp-shell aside nav [data-menu="assets"] { --menu-icon-color: #64748b; }
+.erp-shell aside nav [data-menu="workTypes"] { --menu-icon-color: #9333ea; }
+.erp-shell aside nav [data-menu="notifications"] { --menu-icon-color: #ca8a04; }
+.erp-shell aside nav [data-menu="users"] { --menu-icon-color: #0d9488; }
+.erp-shell aside nav [data-menu="roles"] { --menu-icon-color: #7c3aed; }
+.erp-shell aside nav [data-menu="ldap"] { --menu-icon-color: #0284c7; }
+.erp-shell aside nav [data-menu="smtp"] { --menu-icon-color: #0891b2; }
+.erp-shell aside nav [data-menu="auditLogs"] { --menu-icon-color: #4f46e5; }
+.erp-shell aside nav [data-menu="settings"] { --menu-icon-color: #475569; }
+.erp-shell aside nav [data-menu="guide"], .erp-shell aside nav [data-menu="flow"] { --menu-icon-color: #ea580c; }
+.erp-shell aside nav button.active {
+  color: #047857;
+  background: #e9faf2;
+  box-shadow: none;
+  font-weight: 700;
+  position: relative;
+}
+.erp-shell aside nav button.active:before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 0 3px 3px 0;
+  background: #10b981;
+}
+.erp-shell .nav-group {
+  margin-top: 8px;
+}
+.erp-shell aside nav .nav-group-heading {
+  min-height: 32px;
+  color: #85968d;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 7px 12px;
+  justify-content: space-between;
+}
+.erp-shell .nav-group > div {
+  display: grid;
+  gap: 3px;
+}
+.erp-shell .nav-group > div[hidden] {
+  display: none;
+}
+.erp-shell .nav-group > div > button {
+  padding-left: 18px;
+}
+.erp-shell .aside-note {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  border: 1px solid #def3e8;
+  border-radius: 12px;
+  background: #f5fcf8;
+  padding: 12px;
+  margin-top: 18px;
+  color: #39705a;
+  font-size: 12px;
+}
+.erp-shell .aside-note small {
+  color: #8a9c91;
+}
+.erp-shell .workspace > header {
+  overflow: visible;
+  min-height: 64px;
+  padding: 10px 28px;
+  border-color: #e5ebe7;
+  gap: 18px;
+}
+.erp-shell .header-context {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #87978f;
+  font-size: 12px;
+  min-width: 0;
+}
+.erp-shell .header-context strong {
+  color: #334d40;
+  white-space: nowrap;
+}
+.breadcrumb-divider {
+  color: #bdc9c2;
+}
+.breadcrumb-home {
+  padding: 6px;
+  min-height: 30px;
+}
+.erp-shell .workspace-clock {
+  padding: 9px 12px;
+  background: #f0faf5;
+  color: #4b7763;
+  border: 1px solid #e3f4eb;
+  border-radius: 10px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.erp-shell .header-actions {
+  gap: 8px;
+}
+.erp-shell .user-avatar {
+  background: linear-gradient(135deg, #34d399, #059669);
+  color: #fff;
+}
+.erp-shell main {
+  max-width: none;
+  padding: 14px 18px;
+}
+.erp-shell .page-heading .eyebrow {
+  display: none;
+}
+.erp-shell .page-heading {
+  margin-bottom: 16px;
+  gap: 12px;
+  align-items: center;
+}
+.erp-shell .page-heading h1 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 24px;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+.erp-shell .page-heading .muted {
+  font-size: 13px;
+  margin: 0;
+}
+.heading-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #34d399, #059669);
+  color: white;
+  box-shadow: 0 5px 12px #05966925;
+  flex-shrink: 0;
+}
+.erp-shell button {
+  min-height: 40px;
+}
+.erp-shell input,
+.erp-shell select {
+  min-height: 40px;
+  font-size: 13px;
+  padding: 10px 12px;
+}
+.erp-shell h2 {
+  font-size: 17px;
+}
+.erp-shell .panel {
+  border-radius: 18px;
+  border-color: #e5ece8;
+  box-shadow: 0 2px 5px #102c1f03;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.erp-shell .stat {
+  background:
+    radial-gradient(ellipse at top right, #ecfdf5, transparent 70%), #fff;
+}
+.erp-shell .stat-1 {
+  background:
+    radial-gradient(ellipse at top right, #fffbeb, transparent 70%), #fff;
+}
+.erp-shell .stat-2 {
+  background:
+    radial-gradient(ellipse at top right, #eff6ff, transparent 70%), #fff;
+}
+.erp-shell .stat strong {
+  font-size: 34px;
+}
+.erp-shell .stat small {
+  font-size: 11px;
+}
+.erp-shell .list-toolbar {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf1ef;
+  gap: 12px;
+}
+.erp-shell .filter {
+  gap: 10px;
+}
+.erp-shell .filter input {
+  max-width: 300px;
+}
+.erp-shell .filter .secondary {
+  background: #fff;
+  color: #426452;
+  font-size: 13px;
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 12px;
+}
+.data-table th {
+  background: #f7faf8;
+  color: #7c8f82;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 13px 14px;
+  border-bottom: 1px solid #e5eee8;
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 15px 14px;
+  border-bottom: 1px solid #edf1ee;
+  vertical-align: middle;
+  line-height: 1.7;
+}
+.data-table tbody tr:hover {
+  background: #f8fcfa;
+}
+.data-table td b {
+  font-weight: 500;
+}
+.data-table td small {
+  margin-top: 3px;
+  color: #92a196;
+}
+.data-table td:first-child {
+  min-width: 150px;
+}
+.data-table td:nth-child(2) {
+  min-width: 180px;
+}
+.data-table td:nth-child(4) {
+  color: #71877b;
+}
+.table-link {
+  background: transparent;
+  padding: 0;
+  color: #048863;
+  text-align: left;
+  font-size: 12px;
+  min-height: 36px;
+}
+.table-open {
+  white-space: nowrap;
+  font-size: 11px;
+}
+.erp-shell .badge {
+  font-size: 11px;
+  padding: 4px 10px;
+}
+.erp-shell .pagination {
+  justify-content: flex-end;
+  font-size: 12px;
+  gap: 14px;
+}
+.erp-shell .pagination button {
+  font-size: 12px;
+}
+.erp-shell .pagination { flex-wrap: wrap; }
+.erp-shell .pagination-range { margin-right: auto; color: #82968e; }
+.erp-shell footer {
+  border-top: 1px solid #e5eee8;
+  padding-top: 20px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (min-width: 761px) {
+  .sidebar-collapsed {
+    --sidebar-width: 78px;
+  }
+  .sidebar-collapsed aside .brand > div,
+  .sidebar-collapsed .nav-label,
+  .sidebar-collapsed .menu-search,
+  .sidebar-collapsed .nav-group-heading {
+    display: none !important;
+  }
+  .sidebar-collapsed aside .brand {
+    padding: 0;
+    justify-content: center;
+    margin-top: 35px;
+  }
+  .sidebar-collapsed aside nav button {
+    justify-content: center;
+    padding: 12px !important;
+  }
+  .sidebar-collapsed .aside-note {
+    justify-content: center;
+    padding: 12px 8px;
+  }
+  .sidebar-collapsed .desktop-collapse {
+    right: 22px;
+  }
+  .sidebar-collapsed .nav-group > div {
+    display: grid !important;
+  }
+}
+@media (max-width: 1100px) {
+  .erp-shell .workspace-clock {
+    display: none;
+  }
+  .erp-shell .header-context {
+    gap: 8px;
+  }
+  .erp-shell main {
+    padding: 14px 18px;
+  }
+}
+@media (max-width: 760px) {
+  .erp-shell {
+    --sidebar-width: 270px;
+  }
+  .erp-shell aside {
+    width: 270px;
+    padding: 26px 16px;
+  }
+  .erp-shell .workspace {
+    margin-left: 0;
+  }
+  .erp-shell .desktop-collapse {
+    display: none;
+  }
+  .erp-shell .mobile-close {
+    color: #648674;
+  }
+  .erp-shell header {
+    padding: 10px 14px;
+  }
+  .erp-shell .header-context {
+    display: none;
+  }
+  .erp-shell .header-actions {
+    margin-left: auto;
+  }
+  .erp-shell .header-actions .ghost {
+    padding: 7px;
+    gap: 7px;
+  }
+  .erp-shell main {
+    padding: 12px;
+  }
+  .erp-shell .page-heading {
+    align-items: flex-start;
+  }
+  .erp-shell .page-heading h1 {
+    font-size: 20px;
+    gap: 10px;
+  }
+  .heading-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+  .erp-shell .page-heading .muted {
+    font-size: 11px;
+  }
+  .erp-shell .page-heading > button {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .erp-shell .panel {
+    padding: 18px;
+  }
+  .erp-shell .stat {
+    padding: 16px;
+  }
+  .erp-shell .stat strong {
+    font-size: 30px;
+  }
+  .erp-shell .list-toolbar {
+    align-items: stretch;
+  }
+  .erp-shell .filter input {
+    max-width: none;
+  }
+  .erp-shell .filter select {
+    min-width: 120px;
+  }
+  .erp-shell .table-scroll {
+    overflow: visible;
+  }
+  .data-table,
+  .data-table tbody {
+    display: block;
+  }
+  .data-table thead {
+    display: none;
+  }
+  .data-table tr {
+    display: block;
+    padding: 12px;
+    border: 1px solid #e4eee8;
+    border-radius: 12px;
+    margin: 12px 0;
+  }
+  .data-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 7px 0;
+    border: 0;
+    min-width: 0 !important;
+    overflow-wrap: anywhere;
+  }
+  .data-table td:before {
+    content: attr(data-label);
+    color: #8a9e90;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .data-table td:nth-child(2) {
+    display: block;
+  }
+  .data-table td:nth-child(2):before {
+    display: none;
+  }
+  .data-table td:last-child {
+    justify-content: flex-end;
+  }
+  .data-table td:last-child:before {
+    display: none;
+  }
+  .erp-shell .pagination {
+    justify-content: center;
+    gap: 10px;
+  }
+}
+.erp-shell {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.erp-shell .page-heading h1 {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.erp-shell .page-heading .muted,
+.erp-shell aside nav button,
+.erp-shell input,
+.erp-shell select,
+.erp-shell textarea,
+.erp-shell button {
+  font-size: 13px;
+}
+
+.erp-shell .data-table {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.erp-shell .data-table th {
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.erp-shell .data-table td,
+.erp-shell .table-link {
+  font-size: 13px;
+}
+
+.erp-shell .data-table td small,
+.erp-shell .badge,
+.erp-shell .table-open {
+  font-size: 11px;
+}
+
+/*///////////////////////////////*/
+/* ข้อความเมนู */
+.erp-shell aside nav button,
+.erp-shell aside nav .nav-label {
+  font-size: 12px;
+}
+
+/* หัวข้อกลุ่มเมนู */
+.erp-shell aside nav .nav-group-heading,
+.erp-shell aside nav .nav-group-heading .nav-label {
+  font-size: 11px;
+}
+
+/* ชื่อ AGE CMMS */
+.erp-shell aside .brand {
+  font-size: 16px;
+  gap: 10px;
+}
+.erp-shell aside .brand-mark.brand-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+}
+@media (min-width: 761px) {
+  .erp-shell.sidebar-collapsed aside .brand-mark.brand-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+}
+
+/* ข้อความใต้ชื่อระบบ */
+.erp-shell aside .brand small {
+  font-size: 10px;
+}

@@ -1,0 +1,88 @@
+/* Shared motion for workspace pages; charts and the login screen keep their own animations. */
+@keyframes workspace-card-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes workspace-icon-enter {
+  from { opacity: 0; transform: scale(.82) rotate(-8deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi) {
+    animation: workspace-card-enter 480ms cubic-bezier(.2,.7,.2,1) backwards;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi):nth-child(2) { animation-delay: 65ms; }
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi):nth-child(3) { animation-delay: 130ms; }
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi):nth-child(4) { animation-delay: 195ms; }
+  .erp-shell .dash-metric:nth-child(5) { animation-delay: 260ms; }
+  .erp-shell .dash-metric:nth-child(6) { animation-delay: 325ms; }
+  .erp-shell .dash-metric:nth-child(7) { animation-delay: 390ms; }
+  .erp-shell .dash-metric:nth-child(8) { animation-delay: 455ms; }
+
+  .erp-shell .cmms-dashboard :is(.dash-welcome, .dash-chart-grid > .panel) {
+    animation: workspace-card-enter 550ms ease backwards;
+  }
+  .erp-shell .dash-chart-grid > .panel:nth-child(2) { animation-delay: 100ms; }
+
+  .erp-shell :is(.heading-icon, .au-heading-icon, .wt-heading-icon, .ss-heading-icon, .cg-heading-icon) {
+    animation: workspace-icon-enter 550ms cubic-bezier(.2,.7,.2,1) backwards;
+  }
+
+  .erp-shell :is(
+    .heading-icon, .au-heading-icon, .wt-heading-icon, .ss-heading-icon, .cg-heading-icon,
+    .au-stat-icon, .dash-metric-icon, .audit-metric-icon, .ss-kpi-icon,
+    .permission-role-icon, .cg-flow-icon, .cg-module-icon, .cg-role-icon, .cg-tip-icon,
+    .brand-mark, .account-avatar
+  ),
+  .erp-shell :is(button, a) > svg {
+    transition: transform 220ms ease;
+  }
+
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi, .audit-overview-card):focus-within {
+    transform: translateY(-3px);
+  }
+  .erp-shell :is(button, a):focus-visible > svg {
+    transform: translateY(-2px) scale(1.08);
+  }
+
+  .erp-shell button:not(:disabled):active > svg {
+    transform: scale(.92);
+  }
+}
+
+/* Hover feedback is limited to devices with a pointer to avoid sticky touch states. */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi, .audit-overview-card):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgb(6 78 59 / 10%);
+  }
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi, .audit-overview-card) {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .erp-shell :is(
+    .page-heading, .au-heading, .wt-heading, .ss-heading, .cg-heading
+  ):hover :is(.heading-icon, .au-heading-icon, .wt-heading-icon, .ss-heading-icon, .cg-heading-icon) {
+    transform: rotate(-5deg) scale(1.04);
+  }
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi, .audit-overview-card):hover :is(
+    .au-stat-icon, .dash-metric-icon, .ss-kpi-icon, .audit-metric-icon
+  ),
+  .erp-shell :is(.cg-module, .cg-role, .cg-tip, .permission-role):hover :is(
+    .cg-module-icon, .cg-role-icon, .cg-tip-icon, .permission-role-icon
+  ) {
+    transform: translateY(-2px) rotate(-5deg) scale(1.06);
+  }
+  .erp-shell :is(button, a):not(:disabled):hover > svg {
+    transform: translateY(-2px) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .erp-shell :is(.au-stat, .dash-metric, .ss-kpi, .audit-overview-card):is(:hover, :focus-within) {
+    transform: none;
+  }
+}

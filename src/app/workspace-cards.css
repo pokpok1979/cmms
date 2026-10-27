@@ -1,0 +1,90 @@
+/* Compact summary cards shared by the dashboard and administration pages. */
+.erp-shell :is(.au-stats, .dash-metrics, .ss-summary, .audit-overview-metrics) {
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.erp-shell :is(.au-stat, .ss-kpi) {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-content: start;
+  column-gap: 10px;
+  row-gap: 3px;
+  padding: 14px;
+  border-radius: 12px;
+  min-width: 0;
+}
+.erp-shell :is(.au-stat-icon, .ss-kpi-icon) {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  border-radius: 9px;
+}
+.erp-shell :is(.au-stat-icon, .ss-kpi-icon) svg {
+  width: 18px;
+  height: 18px;
+}
+.erp-shell .au-stat > :not(.au-stat-icon),
+.erp-shell .ss-kpi > :not(.ss-kpi-icon) {
+  grid-column: 2;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.erp-shell .au-stat > p,
+.erp-shell .ss-kpi > span:not(.ss-kpi-icon) {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.erp-shell :is(.au-stat, .ss-kpi) > strong {
+  font-size: 25px;
+  line-height: 1.25;
+}
+.erp-shell .au-note,
+.erp-shell .ss-kpi > small {
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.erp-shell .cmms-dashboard .dash-metric {
+  padding: 12px;
+  border-radius: 12px;
+}
+.erp-shell .dash-metric-top { margin-bottom: 5px; }
+.erp-shell .dash-metric-icon {
+  width: 38px;
+  height: 38px;
+  font-size: 24px;
+}
+.erp-shell .dash-metric strong {
+  font-size: 23px;
+  margin: 2px 0;
+  line-height: 1.2;
+}
+
+.erp-shell .audit-overview-card {
+  min-height: 0;
+  padding: 12px;
+  border-radius: 12px;
+}
+.erp-shell .audit-card-top { margin-bottom: 5px; }
+.erp-shell .audit-metric-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.erp-shell .audit-metric-icon svg { width: 17px; height: 17px; }
+.erp-shell .audit-overview-card > strong { font-size: 23px; line-height: 1.2; }
+
+@media (max-width: 600px) {
+  .erp-shell :is(.au-stat, .ss-kpi) {
+    grid-template-columns: 28px minmax(0, 1fr);
+    padding: 11px;
+    column-gap: 8px;
+  }
+  .erp-shell :is(.au-stat-icon, .ss-kpi-icon) { width: 28px; height: 28px; }
+  .erp-shell :is(.au-stat, .ss-kpi) > strong { font-size: 22px; }
+  .erp-shell .cmms-dashboard .dash-metric { padding: 10px; }
+}
