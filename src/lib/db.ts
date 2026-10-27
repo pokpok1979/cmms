@@ -5,7 +5,19 @@ const nodeState: DatabaseState = {};
 const state = () => databaseContext.getStore() ?? nodeState;
 export function connection() {
   if (!process.env.MONGODB_URI) throw new Error("Database not configured");
-  return (state().client ??= new MongoClient(process.env.MONGODB_URI));
+  const current = state();
+  // Workers is not automatically detected as FaaS by the driver. Avoid
+  // streaming monitors and large pools for clients that live for one request.
+  const workerOptions = databaseContext.getStore() ? {
+    serverMonitoringMode: "poll" as const,
+    maxPoolSize: 1,
+    minPoolSize: 0,
+    maxConnecting: 1,
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+    waitQueueTimeoutMS: 5000,
+  } : {};
+  return (current.client ??= new MongoClient(process.env.MONGODB_URI, workerOptions));
 }
 export async function db() {
   const c = await connectedClient();

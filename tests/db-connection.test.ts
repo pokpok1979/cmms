@@ -12,6 +12,9 @@ test("overlapping Worker requests isolate clients while sharing within a request
     await Promise.all([0, 1].map(() => databaseContext.run({}, async () => {
       const client = connection();
       clients.push(client);
+      assert.equal(client.options.serverMonitoringMode, "poll");
+      assert.equal(client.options.maxPoolSize, 1);
+      assert.equal(client.options.serverSelectionTimeoutMS, 5000);
       await new Promise(resolve => setImmediate(resolve));
       assert.equal(connection(), client);
     })));
